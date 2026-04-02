@@ -12,3 +12,8 @@ variable "instance_count" {
   description = "This is the number of ec2 instance"
   type = number
 }
+
+variable "instance_type" {
+  description = "This is the instance typr of my ec2"
+  type = string
+}
