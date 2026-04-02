@@ -17,3 +17,8 @@ variable "instance_type" {
   description = "This is the instance typr of my ec2"
   type = string
 }
+
+variable "ami_id" {
+  description = "This is the instance typr of my ec2"
+  type = string
+}
