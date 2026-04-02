@@ -1,24 +1,29 @@
 variable "env" {
-  description = "This is the environment for infra app(dev/prod)"
-  type = string
+  description = "This is the environment for infra app(dev/prd)"
+  type        = string
 }
 
 variable "bucket_name" {
   description = "This is the name of my bucket"
-  type = string
+  type        = string
 }
 
 variable "instance_count" {
   description = "This is the number of ec2 instance"
-  type = number
+  type        = number
 }
 
 variable "instance_type" {
   description = "This is the instance typr of my ec2"
-  type = string
+  type        = string
 }
 
 variable "ami_id" {
   description = "This is the instance typr of my ec2"
-  type = string
+  type        = string
+}
+
+variable "hash_key" {
+  description = "This is the hash key for DynamoDB table"
+  type        = string
 }
