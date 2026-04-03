@@ -61,12 +61,13 @@ Implemented a var.env variable to handle environment-specific logic, such as:
 | Name | Description | Default |
 |------|------------|---------|
 | region | AWS region | us-east-1 |
-| instance_type | EC2 size | t2.micro |
+| instance_type | EC2 size | t3.micro |
 | env | environment | dev/stg/prd |
 | instance_count | instances | 1 |
 
 ## 🧹 Cleanup
-terraform destroy -auto-approve  
+To avoid unnecessary AWS costs, always destroy the infrastructure after testing:
+`terraform destroy -auto-approve  `
 
 ---
 Created by Ritesh Kumar Swain
