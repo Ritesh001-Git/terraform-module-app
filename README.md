@@ -31,6 +31,12 @@ Development | t2.micro | 10 GB | Sandbox for feature testing
 Staging | t2.small | 10 GB | Pre-production integration testing
 Production | t2.medium | 20 GB | High-availability user-facing environment
 
+## 🏗 Architecture Diagram
+
+<p align="center">
+  <img src="Arch_Diag.png" width="800"/>
+</p>
+
 ## 📁 Directory Structure
 ```
 .
