@@ -96,6 +96,7 @@ Implemented a var.env variable to handle environment-specific logic, such as:
 
 ## 🧹 Cleanup
 To avoid unnecessary AWS costs, always destroy the infrastructure after testing:
+
 `terraform destroy -auto-approve  `
 
 ---
