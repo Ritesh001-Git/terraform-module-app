@@ -4,18 +4,19 @@
 This project automates the deployment of a scalable AWS infrastructure across three distinct environments: Development (Dev), Staging (Stg), and Production (Prd). By utilizing Terraform Modules, the setup ensures code reusability, consistency, and easy environment management.
 
 ## 🏗 Architecture Components
-- Compute: EC2 Instances (t2 family) running Ubuntu 24.04 LTS.
+- Compute: EC2 Instances (t3 family) running Ubuntu 24.04 LTS.
 - Storage: S3 Buckets for object storage.
 - Database: DynamoDB tables for NoSQL data.
 - Security: Dynamic Security Groups and SSH Key Pairs.
 - Network: Deployment centered in the us-east-1 (N. Virginia) region.
 
 ## 📁 Directory Structure
+```
 .
-├── main.tf                # Root module calling environment modules
-├── provider.tf            # AWS Provider configuration
-├── variables.tf           # Global variables
-├── infra-app/             # REUSABLE MODULE
+├── main.tf                # Root module calling environment modules 
+├── provider.tf            # AWS Provider configuration 
+├── variables.tf           # Global variables 
+├── infra-app/             # REUSABLE MODULE  
 │   ├── ec2.tf             # EC2 and Key Pair logic
 │   ├── s3.tf              # S3 Bucket definition
 │   ├── dynamodb.tf        # DynamoDB table configuration
@@ -23,6 +24,7 @@ This project automates the deployment of a scalable AWS infrastructure across th
 │   └── outputs.tf         # Resource outputs
 |   └── terra-key-ec2.pub  # Generated SSH Public Key
 └── terra-key-ec2.pub      # Generated SSH Public Key
+```
 
 ## 🚀 Getting Started
 
