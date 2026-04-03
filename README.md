@@ -10,6 +10,27 @@ This project automates the deployment of a scalable AWS infrastructure across th
 - Security: Dynamic Security Groups and SSH Key Pairs.
 - Network: Deployment centered in the us-east-1 (N. Virginia) region.
 
+## 📐 Architecture & Infrastructure Flow
+The following flow describes how the infrastructure is provisioned and managed:
+
+1. Local Development (The Source)
+- Environment: Development is performed on a MacBook Air using VS Code.
+- Security: An SSH Key Pair (terra-key-ec2) is generated locally. The public key is injected into the AWS instances during the provisioning phase to allow secure access.
+
+2. Infrastructure as Code (The Logic)
+- Terraform Engine: Uses the HashiCorp Terraform CLI to parse the modular configuration.
+- State Management: Terraform creates a terraform.tfstate file to track the real-world resources against the local configuration.
+- Provider: Connects to the AWS Provider specifically configured for the us-east-1 (North Virginia) region.
+
+3. Modular Deployment (The Execution)
+The root configuration calls a reusable infra-app module three times, passing different variables for each environment:
+
+Environment | Instance Type | Storage (gp3) | Purpose
+--- | --- | --- | ---
+Development | t2.micro | 10 GB | Sandbox for feature testing
+Staging | t2.small | 10 GB | Pre-production integration testing
+Production | t2.medium | 20 GB | High-availability user-facing environment
+
 ## 📁 Directory Structure
 ```
 .
