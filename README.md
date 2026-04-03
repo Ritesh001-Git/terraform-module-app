@@ -11,15 +11,18 @@ This project automates the deployment of a scalable AWS infrastructure across th
 - Network: Deployment centered in the us-east-1 (N. Virginia) region.
 
 ## 📁 Directory Structure
-├── main.tf  
-├── provider.tf  
-├── variables.tf  
-├── infra-app/  
-    ├── ec2.tf  
-    ├── s3.tf  
-    ├── dynamodb.tf  
-    ├── variables.tf   
-    └── terra-key-ec2.pub  
+.
+├── main.tf                # Root module calling environment modules
+├── provider.tf            # AWS Provider configuration
+├── variables.tf           # Global variables
+├── infra-app/             # REUSABLE MODULE
+│   ├── ec2.tf             # EC2 and Key Pair logic
+│   ├── s3.tf              # S3 Bucket definition
+│   ├── dynamodb.tf        # DynamoDB table configuration
+│   ├── variables.tf       # Module-specific variables
+│   └── outputs.tf         # Resource outputs
+|   └── terra-key-ec2.pub  # Generated SSH Public Key
+└── terra-key-ec2.pub      # Generated SSH Public Key
 
 ## 🚀 Getting Started
 
@@ -28,17 +31,31 @@ This project automates the deployment of a scalable AWS infrastructure across th
 - AWS CLI configured
 
 ### Generate SSH Key
-ssh-keygen -f terra-key-ec2
+`ssh-keygen -f terra-key-ec2`
 
 ### Deployment
-terraform init  
-terraform plan  
-terraform apply -auto-approve  
+```
+# Initialize the project and download providers
+terraform init
 
-## 🛠 Challenges Solved
-- Fixed ARM64 vs x86_64 mismatch  
-- BIOS compatibility ensured  
-- Modular env-based logic  
+# Preview the infrastructure changes for all 3 environments
+terraform plan
+
+# Deploy the infrastructure to AWS
+terraform apply -auto-approve
+```
+
+## 🛠 Technical Challenges Solved
+#### Fixed ARM64 vs x86_64 mismatch
+During development, I resolved a critical mismatch where ARM64 AMIs were being applied to x86_64 t2 instances. The project now correctly utilizes x86_64 (Intel) AMIs to maintain         compatibility with Free Tier eligible hardware.
+   
+#### BIOS compatibility ensured
+Since t2.micro instances do not support UEFI boot modes, the module is specifically configured to use Legacy BIOS compatible AMIs (hvm), ensuring successful instance initialization in the us-east-1 region.
+
+#### Modular env-based logic  
+Implemented a var.env variable to handle environment-specific logic, such as:
+- Storage: Production environments use larger 20GB gp3 volumes, while Dev/Stg use 10GB.
+- Naming: All resources follow a strict ${var.env}-infra-app naming convention for easy tracking in the AWS Console.
 
 ## 📋 Variables
 | Name | Description | Default |
